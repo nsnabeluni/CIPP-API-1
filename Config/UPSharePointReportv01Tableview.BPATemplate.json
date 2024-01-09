@@ -1,0 +1,98 @@
+{
+  "name": "UP SharePoint Report v0.1 - Table view",
+  "style": "Table",
+  "Fields": [
+    {
+      "name": "SharepointSettings",
+      "UseExistingInfo": false,
+      "FrontendFields": [
+        {
+          "name": "Sharing capability",
+          "value": "SharepointSettings.sharingCapability",
+          "formatter": "string"
+        },
+        {
+          "name": "Mac Sync Enabled",
+          "value": "SharepointSettings.isMacSyncAppEnabled",
+          "formatter": "warnBool"
+        },
+        {
+          "name": "Resharing by external users",
+          "value": "isResharingByExternalUsersEnabled",
+          "formatter": "reverseBool"
+        },
+        {
+          "name": "Allow users to sync from unmanaged devices",
+          "value": "SharepointSettings.isUnmanagedSyncAppForTenantRestricted",
+          "formatter": "bool"
+        },
+        {
+          "name": "Site creation by standards users enabled",
+          "value": "SharepointSettings.isSiteCreationEnabled",
+          "formatter": "reverseBool"
+        },
+        {
+          "name": "Deleted user data rention(days)",
+          "value": "SharepointSettings.deletedUserPersonalSiteRetentionPeriodInDays",
+          "formatter": "string"
+        },
+        {
+          "name": "Excluded File Extensions For Sync App",
+          "value": "SharepointSettings.excludedFileExtensionsForSyncApp"
+        },
+        {
+          "name": "Idle Session Sign Out",
+          "value": "idleSessionSignOut"
+        },
+        {
+          "name": "Legacy Auth Protocols Enabled",
+          "value": "isLegacyAuthProtocolsEnabled",
+          "formatter": "bool"
+        },
+        {
+          "name": "Guests must sign in using the same account",
+          "value": "isRequireAcceptingUserToMatchInvitedUserEnabled",
+          "formatter": "bool"
+        },
+        {
+          "name": "Sharing Domain restriction mode",
+          "value": "sharingDomainRestrictionMode"
+        }
+      ],
+      "StoreAs": "JSON",
+      "API": "Graph",
+      "ExtractFields": [
+        "sharingCapability",
+        "isMacSyncAppEnabled",
+        "isResharingByExternalUsersEnabled",
+        "isUnmanagedSyncAppForTenantRestricted",
+        "isSiteCreationEnabled",
+        "deletedUserPersonalSiteRetentionPeriodInDays",
+        "excludedFileExtensionsForSyncApp",
+        "idleSessionSignOut",
+        "isLegacyAuthProtocolsEnabled",
+        "isRequireAcceptingUserToMatchInvitedUserEnabled",
+        "sharingDomainRestrictionMode"
+      ],
+      "URL": "https://graph.microsoft.com/beta/admin/sharepoint/settings"
+    },
+    {
+      "name": "WebtimeOut",
+      "UseExistingInfo": false,
+      "FrontendFields": [
+        {
+          "name": "Web Time-Out enabled",
+          "value": "WebtimeOut",
+          "formatter": "bool"
+        }
+      ],
+      "where": "$_.definition -like '*WebSessionIdleTimeout*'",
+      "StoreAs": "bool",
+      "API": "Graph",
+      "ExtractFields": [
+        "definition"
+      ],
+      "URL": "https://graph.microsoft.com/beta/policies/activityBasedTimeoutPolicies"
+    }
+  ]
+}
